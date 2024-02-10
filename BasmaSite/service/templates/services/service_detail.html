@@ -1,0 +1,38 @@
+
+
+{% extends 'main/base.html' %}
+{% block title %}Details{% endblock %}
+{% load static %}
+{% block content %}
+    
+
+<h1 class="display-4 fw-bold text-center m-4">{{ service.title }}</h1>
+<div style="
+    display: flex;
+    justify-content: center;
+    align-items: center;
+">
+
+<img src="{{ service.image.url }}" class="rounded-4" style="width: 40%; height: 40%; " alt="{{ service.title }}">
+</div>
+<br>
+<div class="rounded-4" style="background-color: #225044;">
+
+    <p class="fs-3 text-center p-4">{{ service.description }}</p>
+
+</div>
+<hr>
+<div class="card-body m-4 text-center">
+  <form method="POST" action="{% url 'service:service_request' service.id %}" style="margin-bottom: 20px; margin-right: auto; margin-left: auto;">
+    {% csrf_token %}
+  <input type="hidden" name="service" value="{{ service.id }}">
+  <button class="btn" type="submit">Request</button>
+</form>
+</div>
+
+{% endblock %}
+
+
+
+
+  

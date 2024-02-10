@@ -1,0 +1,24 @@
+  
+{% extends 'main/base.html' %}
+{% block title %}Add Project{% endblock %}
+{% load static %}
+{% block content %}
+<section class="contact" id="contact">
+  <h2 class="heading text-center">Add New Project</h2>
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+      <input type="text" class="my-input" name="title" value="{{ service.title }}" placeholder="Title">
+      <textarea type="text" class="my-input" name="content" placeholder="Description" row="3">{{ service.description }}</textarea>
+      <input type="file" class="my-input" name="image">
+      <input type="url" class="my-input" name="link" placeholder="Project Link" id="link">
+
+
+      <input type="submit" value="{% if service %}Update{% else %}Add{% endif %}" class="btn">
+      
+  </form>
+</section>
+   
+{% endblock %}
+    

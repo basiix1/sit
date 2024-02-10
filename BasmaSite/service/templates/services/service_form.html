@@ -1,0 +1,35 @@
+  
+{% extends 'main/base.html' %}
+{% block title %}{% if service %}Update Service{% else %}Add Service{% endif %} {% endblock %}
+{% load static %}
+{% block content %}
+{% if user.is_staff or user.is_superuser %}
+<section class="contact" id="contact">
+  <h2 class="heading text-center">{% if service %}Update Service{% else %}Add Service{% endif %}</h2>
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+      <input type="text" class="my-input" name="title" value="{{ service.title }}" placeholder="Title">
+      <textarea type="text" class="my-input" name="description" placeholder="Description" row="3">{{ service.description }}</textarea>
+      <input type="file" class="my-input" name="image">
+      <select class=" my-input"name="icon" required>
+        <option value="" disabled selected>Icon of Service</option>
+        <option value="bx-cart">Cart</option>
+        <option value="bxl-html5">HTML5</option>
+        <option value="bxl-django">Django</option>
+        <option value="bxl-css3">CSS3</option>
+        <option value="bxl-python">PYTHON</option>
+        <option value="bxl-500px">ANLAYSIS</option>
+        <option value="bx-data">Data</option>
+
+
+        </select>
+
+      <input type="submit" value="{% if service %}Update{% else %}Add{% endif %}" class="btn">
+      
+  </form>
+</section>
+{% endif %}
+{% endblock %}
+    

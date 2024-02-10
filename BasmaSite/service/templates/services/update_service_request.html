@@ -1,0 +1,54 @@
+{% extends 'main/base.html' %}
+{% block title %}Update Service Request{% endblock %}
+{% load static %}
+{% block content %}
+<section class="contact" id="contact">
+    <h2 class="heading text-center">Update Request Status</h2>
+    <table class="table table-success rounded-4">
+        <thead>
+            <tr style="font-size: 20px; text-align: center;">
+                <th scope="col">Requester</th>
+                <th scope="col">Service</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+        
+              <tr style="font-size: 20px;  text-align: center;">
+                <td>{{ service_request.user.username }}</td>
+                <td>{{ service_request.service.title }}</td>
+                {% if service_request.status == 'pending' %}
+                <td>{{ service_request.status }} 🕛</td>
+                {% endif %}
+                {% if service_request.status == 'in_progress' %}
+                <td>{{ service_request.status }} 🕑</td>
+                {% endif %}
+                {% if service_request.status == 'done' %}
+                <td>{{ service_request.status }} ✅</td>
+                {% endif %}
+                {% if service_request.status == 'canceled' %}
+                <td>{{ service_request.status }} ❌</td>
+                {% endif %}
+                
+              </tr>
+              
+            </tbody>
+          </table>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+    
+        <select class=" my-input" style="font-size: 20px; width: 20%;" name="status" required>
+            <!-- selected -->
+            <option value="" disabled selected>Status</option>
+            <option value="pending">Pending</option>
+            <option value="in_progress">In Progress</option>
+            <option value="done">Done</option>
+            <option value="canceled">Canceled</option>
+        </select><br>
+  
+        <input type="submit" value="Update" class="btn">
+        
+    </form>
+  </section>
+
+{% endblock %}

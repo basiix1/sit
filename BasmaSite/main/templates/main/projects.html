@@ -1,0 +1,176 @@
+{% extends 'main/base.html' %}
+{% block title %}Projects{% endblock %}
+{% load static %}
+{% block content %}
+<style>
+
+.header {
+    padding: 4rem 5rem;
+
+    .header-title {
+        position: relative;
+        font-size: 1.5rem;
+        font-weight: 600;
+        text-transform: uppercase;
+
+        &::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -15px;
+            background: linear-gradient(to right, #00b4db, #0083b0);
+            width: 150px;
+            height: 5px;
+            border-radius: 1rem;
+        }
+    }
+}
+
+.container1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5rem;
+}
+
+.card1 {
+    position: relative;
+    height: 400px;
+    width: 300px;
+    box-shadow: 0 0 1.5rem rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        transition: all .25s ease;
+        z-index: -1;
+    }
+
+
+
+    .card-content {
+        display: flex;
+        height: 100%;
+        width: 100%;
+        padding: 1.5rem;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        z-index: 1;
+        color: #FFF;
+        transition: background-color .25s ease, opacity .25s ease;
+        opacity: 0;
+
+        .title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        p {
+            text-align: center;
+            font-weight: 200;
+        }
+    }
+
+    &:hover {
+        &:before {
+            transform: scale(1.2);
+        }
+
+        .card-content {
+            opacity: 1;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+        }
+    }
+}
+
+@media (max-width: 992px) {
+    .header {
+        padding: 4rem 2rem;
+    }
+
+    .container1 {
+        flex-direction: column;
+        padding: 0 2rem;
+    }
+
+    .card1 {
+        margin: 2rem 0;
+        width: 100%;
+
+        &::before {
+            background-position: center;
+        }
+    }
+}
+</style>
+
+
+<h1 style="margin-bottom: 20px;">Projects Page</h1>
+
+<div class="row">
+  {% for project in projects %}
+  <div class="col-sm-4 mb-3 mb-sm-0">
+    
+    <div class="card1 card-2 rounded-5 " style="background-image: url('{{ project.image.url }}'); 
+  background-size: 200%;
+  background-repeat: no-repeat;
+
+  width: 100%;
+  background-position: center center;
+    ">
+      <div class="card-content">
+          <a href="{% url 'main:project_details' project_id=project.id %}" style="text-decoration: none; color: white;"><div class="title" style="font-size: 40px;">{{ project.title }}</div></a>
+          <!-- <p style="font-size: 20px; margin-bottom: 25px;">{{ project.content }}</p> -->
+          <div class="d-flex justify-content-around">
+            {% if user.is_staff or user.is_superuser %}
+              <a class="btn" style="margin-right: 10px;" href="{% url 'main:delete_project' project_id=project.id %}"><i class='bx bx-trash'></i></a> 
+            {% endif %}
+              <a class="btn" style="margin-right: 10px;" href="{% url 'main:project_details' project_id=project.id %}">Read More</a>
+
+          </div>
+      </div>
+  </div>
+  
+  </div>
+  {% empty %}
+  <div class="text-center">
+
+      <h3>No Projects Yet ☹️</h3>
+      <br>
+      {% if user.is_staff or user.is_superuser %}
+
+      <a class="btn" href="{% url 'main:add_project' %}">Add Project</a>
+      {% endif %}
+  </div>
+  {% endfor %}
+</div>
+
+{% if new_project %}
+
+<div class="col-4 mt-4">
+  <div class="d-flex flex-column gap-3 border border-1 shadow rounded-4 p-4 mt-3  h-100 justify-content-between">
+    <img src="{{ project.image.url }}" class="rounded-4 object-fit-cover border border-1 book-poster"
+      alt="{{ project.title }}">
+    <h3 class="card-title">{{ project.title }}</h3>
+    <a href="{% url 'main:project_details' project_id=project.id %}">
+      <h5>MORE</h5>
+      <span class="material-symbols-outlined"> arrow_forward</span>
+    </a>
+    <a href="{% url 'main:delete_project' project_id=project.id %}">Delete</a>
+  </div>
+</div>
+<a href="{% url 'main:add_project' %}">Add Project</a>
+</div>
+{% endif %}
+
+
+{% endblock %}

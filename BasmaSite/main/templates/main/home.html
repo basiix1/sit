@@ -1,0 +1,108 @@
+{% extends 'main/base.html' %}
+{% block title %}Home | My Website{% endblock %}
+{% load static %}
+{% block content %}
+   <!-- home section design -->
+   <section class="home" id="home" style="margin-top: -60px;">
+      <div class="home-content">
+          <h3>Hello, It's Me </h3>
+      
+          <h1>Basma Alshahrani </h1>
+          <h3>And I'm a <span class="multiple-text"></span></h3>
+          <p>"I'm an extremely ambitious (23-yearold)  who enjoys problem-solving, invention, and exploration. You can trust me."</p>
+          <div class="social-media">
+              <a  style="text-decoration: none!important;" href="https://t.me/war3459"><i class='bx bxl-telegram'></i></a>
+              <a  style="text-decoration: none!important;" href="https://twitter.com/ii2x_iii?s=21&t=gvaJM8kzbGHS0RotFGXrKw"><i class='bx bxl-twitter'></i></a>
+              <a  style="text-decoration: none!important;" href="https://github.com/basiix1"><i class='bx bxl-github'></i></a>
+              <a  style="text-decoration: none!important;" href="https://www.linkedin.com/in/basma-al-shahrani-a4a981256"><i class='bx bxl-linkedin'></i></a>
+          </div>
+          <a href="https://www.dropbox.com/scl/fi/x7h2dy48lvmkdbzf5n5ep/cv.pdf?rlkey=8q617l3fem6uf6rz4qs3wvz2s&dl=0" class="btn">Download CV</a>
+      </div>
+
+      <div class="home-img">
+          <img src="{% static 'images/basma.PNG' %}" alt="">
+      </div>
+  </section>
+
+  <!-- about section design -->
+  <section class="about rounded-5" id="about" style="background-color: #225044!important;">
+      <div class="about-img">
+      <img src="{% static 'images/abut79.PNG' %}" alt="">
+      </div>
+
+      <div class="about-content">
+        <h2 class="heading">About <span>Me</span></h2>
+        <h3>Full-Stack Developer </h3>
+        <p>I focused on computer information systems when I was a student at Bisha University, where I had to work
+           with a lot of data and also analyze it in different ways. My area of expertise was initially based on that. True novels are my 
+           favorite to write and read. I love being in a constructive and successful environment. I also love anime movies, 
+          TV shows, and movies that contain elements of nature. I love cats, and that's me.</p>
+        <a href="{% url 'main:about' %}" class="btn">Read More</a>
+      </div>
+  </section>
+
+  <!-- services section design -->
+  <section class="services rounded-5" id="services">
+      <h2 class="heading">My<span>Services</span></h2>
+      <div class="services-container" >
+          {% for service in services %}
+          <div class="services-box" style="background-color: #225044!important;">
+              <i class='bx {{ service.icon }}'></i>
+              <h3>{{ service.title }}</h3>
+              <p>{{ service.description }}</p>
+              <a href="{% url 'service:service_detail' service.id %}" class="btn">Read More</a>
+          </div>
+        {% endfor %}
+      </div>
+  </section>
+
+  <!-- portfolio section design -->
+  <section class="portfolio rounded-5" id="portfolio" style="background-color: #225044!important;">
+      <h2 class="heading">WORK <span> & FUN</span></h2>
+      <div class="portfolio-container">
+        <div class="portfolio-box">
+            <img src="https://i.pinimg.com/564x/ec/ad/91/ecad916ee2008e7b33dfa89bb9ae6c71.jpg" alt="">
+            <div class="portfolio-layer">
+                <h4>MY PROJECT </h4>
+                <p>If you want to know about my projects, please feel free to contact me.</p>
+                <a style="text-decoration: none;" href="{% url 'main:projects' %}"><i class='bx bx-link-external'></i></a>
+            </div>
+        </div>
+        <div class="portfolio-box">
+            <img src="https://i.pinimg.com/564x/f5/50/4d/f5504d064c8d3b049efeb6049bf0e7d6.jpg" alt="">
+            <div class="portfolio-layer">
+                <h4>MY BOOK </h4>
+                <p>Some books I read and found worth sharing</p>
+                <a style="text-decoration: none;" href="#"><i class='bx bx-link-external'></i></a>
+            </div>
+        </div>
+        <div class="portfolio-box">
+            <img src="https://i.pinimg.com/564x/dc/cb/ff/dccbff8cc3ed4b3c98c9e2931bcde965.jpg" alt="">
+            <div class="portfolio-layer">
+                <h4>MY ANIME</h4>
+                <p>For fun, here I have put some anime that I followed and found interesting and beautiful</p>
+                <a style="text-decoration: none;" href="{% url 'main:anime_view' %}"><i class='bx bx-link-external'></i></a>
+            </div>
+        </div>
+    </div>
+
+      </section>
+
+  <!-- contact section design -->
+  <section class="contact" id="contact">
+      <h2 class="heading text-center">Contact <span>Me!</span></h2>
+
+      <form action="#">
+          <div class="input-box">
+              <input type="text" placeholder="Full Name" value="{{ user.first_name }} {{ user.last_name }}">
+              <input type="email" placeholder="Email Address" value="{{ user.email }}">
+          </div>
+          <div class="input-box">
+              <input type="number" placeholder="Mobile Number">
+              <input type="text" placeholder="Email Subject">
+          </div>
+          <textarea name="" id="" cols="30" rows="10" placeholder="Your Message"></textarea>
+          <input type="submit" value="Send Message" class="btn">
+      </form>
+  </section>
+{% endblock %}

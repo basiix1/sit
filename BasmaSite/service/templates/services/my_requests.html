@@ -1,0 +1,60 @@
+
+{% extends 'main/base.html' %}
+{% block title %}My Requests{% endblock %}
+{% load static %}
+{% block content %}
+<br>
+
+    {% if user.is_superuser %}
+    <a href="{% url 'accounts:profile' %}" style="text-decoration: none; color: white;"> <h1 style="font-size: 50px;"><i class='bx bx-left-arrow-alt' ></i> My Requests</h1></a>
+    {% else %}
+    <a href="{% url 'main:home' %}" style="text-decoration: none; color: white;"> <h1 style="font-size: 50px;"><i class='bx bx-left-arrow-alt' ></i> My Requests</h1></a>
+    {% endif %}
+    <br>
+    
+    <table class="table table-success rounded-4">
+        <thead>
+            <tr style="font-size: 20px; text-align: center;">
+                <th scope="col">#</th>
+                <th scope="col">Service</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            {% for request in service_requests %}
+              <tr style="font-size: 20px;  text-align: center;">
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ request.service.title }}</td>
+                {% if request.status == 'pending' %}
+                <td>{{ request.status }} 🕛</td>
+                {% endif %}
+                {% if request.status == 'in_progress' %}
+                <td>{{ request.status }} 🕑</td>
+                {% endif %}
+                {% if request.status == 'done' %}
+                <td>{{ request.status }} ✅</td>
+                {% endif %}
+                {% if request.status == 'canceled' %}
+                <td>{{ request.status }} ❌</td>
+                {% endif %}
+
+              </tr>
+              {% endfor %}
+         
+            </tbody>
+          </table>
+<!-- 
+            {% if request.status == 'pending' %}
+            <h2 style="font-size: 30px; margin-top: 20px;"> - {{ request.service.title }} <span class="badge rounded-pill bg-secondary " style="color: black">{{ request.status }} 🕛</span></h2>
+            {% endif %}
+            {% if request.status == 'in_progress' %}
+            <h2 style="font-size: 30px; margin-top: 20px;"> - {{ request.service.title }} <span class="badge rounded-pill bg-secondary " style="color: black">{{ request.status }} 🕑</span></h2>
+            {% endif %}
+            {% if request.status == 'done' %}
+            <h2 style="font-size: 30px; margin-top: 20px;"> - {{ request.service.title }} <span class="badge rounded-pill" style="background-color: #B7ED3F; color: black">{{ request.status }} ✅</span></h2>
+            {% endif %}
+            {% if request.status == 'canceled' %}
+            <h2 style="font-size: 30px; margin-top: 20px;"> - {{ request.service.title }} <span class="badge rounded-pill bg-secondary" style="color: black">{{ request.status }} ❌</span></h2>
+            {% endif %} -->
+{% endblock %}

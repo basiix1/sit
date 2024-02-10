@@ -1,0 +1,22 @@
+{% extends 'main/base.html' %}
+{% block title %}Login{% endblock %}
+{% load static %}
+{% block content %}
+<section class="contact" id="contact">
+  <h2 class="heading text-center">Login</h2>
+
+  <form action="{% url 'accounts:login' %}" method="post">
+    {% csrf_token %}
+
+      <input type="text" class="my-input" name="username" placeholder="Username">
+      <input type="password" class="my-input" name="password" placeholder="Password">
+      <input type="submit" value="Login" class="btn">
+      {% if msg %} 
+        <h5 class="text-white bg-danger p-3 rounded">{{msg}}</h5>
+      {% endif %}
+        <p class="text-white fs-4" style="margin-top: 20px;">Don't have an account? <a style="text-decoration: none; color: #B7ED3F" href="{% url 'accounts:register' %}">Register</a></p>
+  </form>
+</section>
+   
+{% endblock %}
+    

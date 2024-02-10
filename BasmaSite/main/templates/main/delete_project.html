@@ -1,0 +1,22 @@
+
+  {% extends 'main/base.html' %}
+  {% block title %}Delete Confirmation{% endblock %}
+  {% load static %}
+  {% block content %}
+
+  
+  <section class="contact">
+    {% if user.is_staff or user.is_superuser %}
+    <h2 class="heading text-center">Delete Confirmation</h2>
+    
+    <p style="font-size: 30px; text-align: center;">Are you sure you want to delete the project <strong>"{{ project.title }}"</strong>?</p>
+    <form method="post" action="{% url 'main:delete_project' project.id %}">
+      {% csrf_token %}
+      <button class="btn" type="submit">Delete</button>
+      <a class="btn" style="background-color: white!important;" href="{% url 'main:projects' %}">Cancel</a>
+{% else %}
+<h2 class="heading text-center">Only Admins Can Delete Projects.</h2>
+{% endif %}
+  </section>
+     
+  {% endblock %}

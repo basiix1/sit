@@ -1,0 +1,45 @@
+{% extends 'main/base.html' %}
+{% block title %}ABOUT ME{% endblock %}
+{% load static %}
+{% block content %}
+
+<h3 class="card-title">{{ project.title }}</h3>
+<p class="card-text">{{ project.content }}</p>
+<img src="{{ project.image.url }}" class="card-img-top mx-auto " alt="{{ project.title }}">
+<div class="card-body m-4">
+  {% if project.link %}
+    <a class="btn" href="{{ project.link }}">Project Link</a>
+{% endif %}
+</div>
+
+<hr>
+<h3>Comments</h3>
+{% for comment in project.comments.all %}
+    <h4>{{ comment.name }}</h4>
+    <p>{{ comment.content }}</p>
+    <p>Rating: {{ comment.rating }}</p>
+    <p>Date: {{ comment.date_added }}</p>
+    <a href="delete_comment/{{ comment.id }}">Delete</a>
+{% empty %}
+    <p>No comments yet.</p>
+{% endfor %}
+
+<hr>
+
+<h3>Add Comment</h3>
+
+<form method="POST">
+    {% csrf_token %}
+    <input type="text" name="name" placeholder="Your Name" required><br>
+    <textarea name="content" placeholder="Comment" required></textarea><br>
+    <input type="date" name="date_added" required><br>
+    <select name="rating" required>
+        <option value="1">1 star</option>
+        <option value="2">2 stars</option>
+        <option value="3">3 stars</option>
+        <option value="4">4 stars</option>
+        <option value="5">5 stars</option>
+    </select><br>
+    <button type="submit">Add Comment</button>
+</form>
+{% endblock %}

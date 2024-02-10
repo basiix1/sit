@@ -1,0 +1,183 @@
+
+{% load static %}
+   <!-- box icons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- custom css -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&display=swap");
+* {
+
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  font-family: "Montserrat";
+}
+.container {
+  top:100%;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 0;
+  
+}
+.timeline {
+  width: 78%;
+  height: auto;
+  max-width: 700px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.timeline ul {
+  list-style: none;
+}
+.timeline ul li {
+  padding: 20px;
+  background-color: #1e1f22;
+  color: white;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+.timeline ul li:last-child {
+  margin-bottom: 0;
+}
+.timeline-content h1 {
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 30px;
+  margin-bottom: 10px;
+}
+.timeline-content p {
+  font-size: 16px;
+  line-height: 30px;
+  font-weight: 300;
+}
+.timeline-content .date {
+  font-size: 12px;
+  font-weight: 300;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
+@media only screen and (min-width: 768px) {
+  .timeline:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 100%;
+    background-color: gray;
+  }
+  .timeline ul li {
+    width: 50%;
+    position: relative;
+    margin-bottom: 50px;
+  }
+  .timeline ul li:nth-child(odd) {
+    float: left;
+    clear: right;
+    transform: translateX(-30px);
+    border-radius: 20px 0px 20px 20px;
+  }
+  .timeline ul li:nth-child(even) {
+    float: right;
+    clear: left;
+    transform: translateX(30px);
+    border-radius: 0px 20px 20px 20px;
+  }
+  .timeline ul li::before {
+    content: "";
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background-color: gray;
+    top: 0px;
+  }
+  .timeline ul li:nth-child(odd)::before {
+    transform: translate(50%, -50%);
+    right: -30px;
+  }
+  .timeline ul li:nth-child(even)::before {
+    transform: translate(-50%, -50%);
+    left: -30px;
+  }
+  .timeline-content .date {
+    position: absolute;
+    top: -30px;
+  }
+  .timeline ul li:hover::before {
+    background-color: aqua;
+  }
+}
+</style>
+<section>
+  <h1 class="heading">MY <span>SKILLS </span></h1><br>
+<div class="container">
+   <br> <div class="timeline">
+      <ul>
+        <li>
+            <div class="services-container" >
+                <h3>PYTHON</h3>
+                <div class="services-box" style="background-color: #225044!important;">
+                    <i class='bx bxl-python'></i>
+                    <p>I have been working with Python for two years and it has involved
+                         data analysis and currently in website development</p>
+                </div>
+        </li>
+        <li>
+            <div class="services-container" >
+                <h3>SQL</h3>
+                <div class="services-box" style="background-color: #225044!important;">
+                    <i class='bx bx-data'></i>
+                    <p>SQL is an abbreviation for Structured Query Language. It is a programming language
+                         used to manage and analyze relational databases.SQL is used to create, modify, delete,
+                          query, and manage data in databases.</p>
+                </div>
+        </li>
+        <li>
+            <div class="services-container" >
+                <h3>HTML - CSS </h3>
+                <div class="services-box" style="background-color: #225044!important;">
+                    <i class='bx bxl-html5'></i><i class='bx bxl-css3'></i>
+                    <p>HTML is the language for marking up and arranging elements for building web pages.
+                        CSS is a language for formatting and designing elements and layout on web pages.</p>
+                </div>
+                <li>
+                    <div class="services-container" >
+                        <h3> GIT - GITHUP</h3>
+                        <div class="services-box" style="background-color: #225044!important;">
+                            <i class='bx bxl-git'></i><i class='bx bxl-github'></i>
+                            <p>Git is a version control system, and GitHub is a hosting platform for Git projects.</p>
+                        </div>
+                </li>
+                <li>
+                    <div class="services-container" >
+                        <h3> Django</h3>
+                        <div class="services-box" style="background-color: #225044!important;">
+                            <i class='bx bxl-django'></i>
+                            <p>Django is a Python framework for developing advanced web applications.</p>
+                        </div>
+                </li>
+                <li>
+            <div class="services-container" >
+                <h3 class="date">My experience</h3>
+                <div class="services-box" style="background-color: #225044!important;">
+                  <i class='bx bx-detail'></i>
+                    <h2> Data Entery </h2>
+                    <p>My experiences: I dealt with data analysis and entry and that was in a government health facility</p>
+                </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>

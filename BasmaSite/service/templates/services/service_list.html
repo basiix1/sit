@@ -1,0 +1,35 @@
+{% extends 'main/base.html' %}
+{% block title %}Services{% endblock %}
+{% load static %}
+{% block content %}
+<br>
+{% if user.is_staff or user.is_superuser %}
+
+<div class="d-flex justify-content-between">
+  <a href="{% url 'accounts:profile' %}" style="text-decoration: none; color: white;"> <h1 style="font-size: 50px;"><i class='bx bx-left-arrow-alt' ></i> Services</h1></a>
+  <a href="{% url 'service:service_create' %}" style="text-decoration: none; color: white;"> <h1 class="border rounded-3" style="font-size: 30px;"><i class='bx bx-plus' > </i> Add </h1></a>
+</div>
+{% else %}
+<a href="{% url 'main:home' %}" style="text-decoration: none; color: white;"> <h1 style="font-size: 50px;"><i class='bx bx-left-arrow-alt' ></i> Services</h1></a>
+{% endif %}
+
+<section class="services rounded-5" style="margin-top: -40px;" id="services">
+  <div class="services-container" >
+      {% for service in services %}
+      <div class="services-box" style="background-color: #225044!important;">
+          <i class='bx {{ service.icon }}'></i>
+          <h3>{{ service.title }}</h3>
+          <p>{{ service.description }}</p>
+          <a href="{% url 'service:service_detail' service.id %}" class="btn">Read More</a><br><br>
+          {% if user.is_staff or user.is_superuser %}
+          <a href="{% url 'service:service_delete' service.id %}" class="btn">Delete</a>
+          {% endif %}
+          {% if user.is_staff or user.is_superuser %}
+        <br><br>  <a  href="{%url 'service:service_update' service.id%}" class="btn">Update</a>
+          {% endif %}
+
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

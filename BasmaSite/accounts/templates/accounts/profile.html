@@ -1,0 +1,38 @@
+
+{% extends 'main/base.html' %}
+{% block title %}My Profile{% endblock %}
+{% load static %}
+{% block content %}
+<br><br>
+<h1 style="font-size: 40px;"> {{ user.first_name }}  {{ user.last_name }} ( <strong style="color: #b4ee3a; "> {{ user.username }} </strong> )</h1>
+
+<h4 style="color: #b4ee3a; "> {{ user.email }} </h4>
+
+<div class="services-container" style="margin-top: 40px;">
+ 
+
+
+  <a href="{% url 'service:service_list' %}" style="color: white; text-decoration: none;"><div class="services-box" style="background-color: #225044!important;">
+<i class='bx bx-list-ul' ></i>
+      <h3 style="margin-top: 20px;">Services</h3>
+  </div></a>
+
+  <a href="{% url 'service:manager_requests' %}" style="color: white; text-decoration: none;"><div class="services-box" style="background-color: #225044!important;">
+    <i class='bx bx-file-find' ></i>
+      <h3 style="margin-top: 20px;">Requests</h3>
+  </div></a>
+
+  <a href="{% url 'service:service_create' %}" style="color: white; text-decoration: none;"><div class="services-box" style="background-color: #225044!important;">
+    <i class='bx bx-add-to-queue' ></i>
+          <h3 style="margin-top: 20px;">Add Service</h3>
+  </div></a>
+
+  <a href="{% url 'main:add_project' %}" style="color: white; text-decoration: none;"><div class="services-box" style="background-color: #225044!important;">
+    <i class='bx bx-message-square-add'></i>
+          <h3 style="margin-top: 20px;">Add Project</h3>
+  </div></a>
+</div>
+
+
+{% endblock %}
+    

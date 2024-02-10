@@ -1,0 +1,23 @@
+
+
+  {% extends 'main/base.html' %}
+  {% block title %}Delete Confirmation{% endblock %}
+  {% load static %}
+  {% block content %}
+  <section class="contact">
+  {% if user.is_staff or user.is_superuser %}
+    <h2 class="heading text-center">Delete Confirmation</h2>
+    
+    <p style="font-size: 30px; text-align: center;">Are you sure you want to delete the service <strong>"{{ service.title }}"</strong>?</p>
+    <form method="post" action="{% url 'service:service_delete' service.id %}">
+      {% csrf_token %}
+      <button class="btn" type="submit">Delete</button>
+      <a class="btn" style="background-color: white!important;" href="{% url 'service:service_list' %}">Cancel</a>
+    {% else %}
+<h2 class="heading text-center">Only Admins Can Delete Services.</h2>
+{% endif %}
+  </section>
+     
+  {% endblock %}
+      
+  

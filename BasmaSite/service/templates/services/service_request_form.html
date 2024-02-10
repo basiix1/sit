@@ -1,0 +1,8 @@
+<h4>hii</h4>
+<h1>Request Service</h1>
+  <form method="post" action="{% url 'service:service_request' service.id %}">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">Request</button>
+  </form>
+
